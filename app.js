@@ -7,6 +7,7 @@ const schema = buildSchema(`
     type Query {
         hello: String
         user: [String]
+        rollDice(numDice: Int!, numSides: Int): [Int]
     }
 `)
 
@@ -17,6 +18,13 @@ const root = {
     },
     user: () => {
         return [1, 2, 3, 4]
+    },
+    rollDice: ({numDice, numSides}) => {
+        const op = []
+        for (let i = 0; i < numDice; i++) {
+            op.push(1 + Math.floor(Math.random() * (numSides || 6)))
+        }
+        return op
     }
 }
 
