@@ -2,8 +2,19 @@ const express = require('express')
 const graphqlHTTP = require('express-graphql')
 const { buildSchema } = require('graphql')
 
-// 使用 GraphQL Schema Language 创建一个schema
+// create main schema with GraphQL Schema Language 
 const schema = buildSchema(`
+    input MessageInput {
+        content: String
+        author: String
+    }
+
+    type Message {
+        id: ID!
+        content: String
+        author: String
+    }
+
     type RandomDie {
         numSides: Int!
         rollOnce: Int!
@@ -13,12 +24,18 @@ const schema = buildSchema(`
     type Query {
         hello: String
         user: [String]
-        rollDice(numDice: Int!, numSides: Int): [Int],
+        rollDice(numDice: Int!, numSides: Int): [Int]
         getDie(numSides: Int): RandomDie
+        getMessage(id: ID!): Message
+    }
+
+    type Mutation {
+        createMessage(input: MessageInput): Message
+        updateMessage(id: ID!, input: MessageInput): Message
     }
 `)
 
-// 自定义查询类
+// class RandomDie 
 class RandomDie {
     constructor(numSides) {
       this.numSides = numSides
@@ -37,7 +54,19 @@ class RandomDie {
     }
 }
 
-// root 提供所有 API 入口端点相应的解析器函数
+// class Message
+class Message {
+    constructor(id, {content, author}) {
+        this.id = id
+        this.content = content
+        this.author = author
+    }
+}
+
+// fake data
+const fakeDatabase = {}
+
+// resolver function
 const root = {
     hello: () => {
         return 'Hello GraphQL'
@@ -54,14 +83,30 @@ const root = {
     },
     getDie: ({numSides}) => {
         return new RandomDie(numSides || 6)
+    },
+    getMessage: ({id}) => {
+        if (!fakeDatabase.id) {
+            throw new Error(`no message exists with id ${id}`)
+        }
+        return new Message(id, fakeDatabase.id)
+    },
+    createMessage: ({input}) => {
+        const id = require('crypto').randomBytes(10).toString('hex')
+        fakeDatabase.id = input
+        return new Message(id, input)
+    },
+    updateMessage: ({id, input}) => {
+        if (!fakeDatabase.id) {
+            throw new Error(`no message exists with id ${id}`)
+        }
+        fakeDatabase.id = input
+        return new Message(id, input)
     }
 }
 
 
-// 创建 express 服务
+// create http server
 const app = express()
-
-// 定义接口地址
 app.use('/graphql', graphqlHTTP({
     schema: schema,
     rootValue: root,
