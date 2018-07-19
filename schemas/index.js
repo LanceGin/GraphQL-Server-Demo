@@ -5,12 +5,14 @@
   *  @export   : { GraphQLSchema }
   *
   */
-const graphql = require('graphql')
+import {
+    GraphQLSchema
+} from 'graphql'
 
-const queryType = require('../types/query')
-const mutationType = require('../types/mutation')
+import queryType from '../types/query'
+import mutationType from '../types/mutation'
 
-const schema = new graphql.GraphQLSchema({
+const schema = new GraphQLSchema({
     query: queryType,
     mutation: mutationType
 })
