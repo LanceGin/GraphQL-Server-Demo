@@ -10,7 +10,7 @@ import {
     GraphQLString,
     GraphQLNonNull,
     GraphQLID
-} from 'grapql'
+} from 'graphql'
 
 const messageType = new GraphQLObjectType({
     name: 'messageType',

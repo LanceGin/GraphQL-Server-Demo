@@ -9,7 +9,7 @@ import {
     GraphQLObjectType,
     GraphQLNonNull,
     GraphQLID
-} from 'grapql'
+} from 'graphql'
 
 import fakeData from '../fakeData'
 import messageType from './queries/messageType'

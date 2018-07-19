@@ -8,7 +8,7 @@
 import {
     GraphQLInputObjectType,
     GraphQLString,
-} from 'grapql'
+} from 'graphql'
 
 const messageInputType = new GraphQLInputObjectType({
     name: 'messageInputType',

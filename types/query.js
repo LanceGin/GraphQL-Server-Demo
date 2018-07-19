@@ -12,7 +12,7 @@ import {
     GraphQLList,
     GraphQLNonNull,
     GraphQLID
-} from 'grapql'
+} from 'graphql'
 
 import fakeData from '../fakeData'
 import messageType from './queries/messageType'
@@ -67,7 +67,10 @@ const queryType = new GraphQLObjectType({
                 if (!fakeData.id) {
                     throw new Error(`no message exists with id ${id}`)
                 }
-                return {id, fakeData.id}
+                return {
+                    id,
+                    data: fakeData.id
+                }
             }
         }
     }
