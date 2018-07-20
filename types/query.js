@@ -16,6 +16,7 @@ import {
 
 import fakeData from '../fakeData'
 import messageType from './queries/messageType'
+import userType from './queries/userType'
 
 // define the root queryType object
 const queryType = new GraphQLObjectType({
@@ -29,7 +30,7 @@ const queryType = new GraphQLObjectType({
             }
         },
         // field that returns { Array }
-        user: {
+        world: {
             type: new GraphQLList(GraphQLString),
             resolve: (_) => {
                 return [1, 2, 3, 4]
@@ -55,7 +56,19 @@ const queryType = new GraphQLObjectType({
             }
 
         },
-        // field that returns { UserDifinedType }
+        // field that returns { userType }
+        user: {
+            type: userType,
+            args: {
+                id: {
+                    type: new GraphQLNonNull(GraphQLID)
+                }
+            },
+            resolve: (_, {id}) => {
+                console.log('user info', id)
+            }
+        },
+        // field that returns { messageType }
         message: {
             type: messageType,
             args: {
@@ -64,13 +77,10 @@ const queryType = new GraphQLObjectType({
                 }
             },
             resolve: (_, {id}) => {
-                if (!fakeData.id) {
+                if (!fakeData[id]) {
                     throw new Error(`no message exists with id ${id}`)
                 }
-                return {
-                    id,
-                    data: fakeData.id
-                }
+                return fakeData[id]
             }
         }
     }
