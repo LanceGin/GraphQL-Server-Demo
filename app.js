@@ -1,3 +1,10 @@
+/**
+  *  The entry file
+  *
+  *  @author   : Gin (gin.lance.inside@hotmail.com)
+  *  @export   : { express }
+  *
+  */
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
 
