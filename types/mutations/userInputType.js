@@ -8,16 +8,17 @@
 import {
     GraphQLInputObjectType,
     GraphQLString,
+    GraphQLNonNull
 } from 'graphql'
 
 const userInputType = new GraphQLInputObjectType({
     name: 'userInputType',
     fields: {
         name: {
-            type: GraphQLString
+            type: new GraphQLNonNull(GraphQLString)
         },
         nickname: {
-            type: GraphQLString
+            type: new GraphQLNonNull(GraphQLString)
         }
     }
 })
