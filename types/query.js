@@ -65,15 +65,15 @@ const queryType = new GraphQLObjectType({
         },
         // field that returns { userType }
         user: {
-            type: userType,
+            type: new GraphQLList(userType),
             args: {
                 id: {
-                    type: new GraphQLNonNull(GraphQLID)
+                    type: GraphQLID
                 }
             },
             resolve: async (_, {id}) => {
                 const _user = await userInfo({id})
-                return _user[0]
+                return _user
             }
         },
         // field that returns { messageType }
