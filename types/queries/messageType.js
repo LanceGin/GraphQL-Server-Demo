@@ -18,10 +18,16 @@ const messageType = new GraphQLObjectType({
         id: {
             type: new GraphQLNonNull(GraphQLID)
         },
+        user_id: {
+            type: GraphQLString
+        },
         content: {
             type: GraphQLString
         },
-        author: {
+        created_at: {
+            type: GraphQLString
+        },
+        updated_at: {
             type: GraphQLString
         }
     }
