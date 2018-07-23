@@ -15,8 +15,15 @@ import {
 } from 'graphql'
 
 import fakeData from '../fakeData'
+
+// import queryType
 import messageType from './queries/messageType'
 import userType from './queries/userType'
+
+// import resolver
+import {
+    userInfo
+} from '../resolvers/userResolver'
 
 // define the root queryType object
 const queryType = new GraphQLObjectType({
@@ -64,8 +71,9 @@ const queryType = new GraphQLObjectType({
                     type: new GraphQLNonNull(GraphQLID)
                 }
             },
-            resolve: (_, {id}) => {
-                console.log('user info', id)
+            resolve: async (_, {id}) => {
+                const _user = await userInfo({id})
+                return _user[0]
             }
         },
         // field that returns { messageType }
