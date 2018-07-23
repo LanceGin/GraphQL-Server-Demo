@@ -27,6 +27,11 @@ import {
     createUser,
     updateUser
 } from '../resolvers/userResolver'
+import {
+    messageInfo,
+    createMessage,
+    updateMessage
+} from '../resolvers/messageResolver'
 
 
 // define the root mutationType object
@@ -72,10 +77,10 @@ const mutationType = new GraphQLObjectType({
                     type: messageInputType
                 }
             },
-            resolve: (_, {input}) => {
-                const id = require('crypto').randomBytes(10).toString('hex')
-                fakeData.id = input
-                return {id, input}
+            resolve: async (_, {input}) => {
+                const _create = await createMessage(input)
+                const _message = await messageInfo({ id: _create[0] })
+                return _message[0]
             }
         },
         // update a exist message
@@ -89,12 +94,10 @@ const mutationType = new GraphQLObjectType({
                     type: messageInputType
                 }
             },
-            resolve: (_, {id, input}) => {
-                if (!fakeData.id) {
-                    throw new Error(`no message exists with id ${id}`)
-                }
-                fakeData.id = input
-                return {id, input}
+            resolve: async (_, {id, input}) => {
+                const _update = await updateMessage(id, input)
+                const _message = await messageInfo({ id }) 
+                return _message[0]
             }
         }
     }
