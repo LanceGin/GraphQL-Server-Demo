@@ -13,10 +13,10 @@ import {
 const messageInputType = new GraphQLInputObjectType({
     name: 'messageInputType',
     fields: {
-        content: {
+        user_id: {
             type: GraphQLString
         },
-        author: {
+        content: {
             type: GraphQLString
         }
     }
