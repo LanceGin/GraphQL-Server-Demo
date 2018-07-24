@@ -11,8 +11,6 @@ import {
     GraphQLID
 } from 'graphql'
 
-import fakeData from '../fakeData'
-
 // import queryType
 import messageType from './queries/messageType'
 import userType from './queries/userType'

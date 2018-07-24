@@ -14,8 +14,6 @@ import {
     GraphQLID
 } from 'graphql'
 
-import fakeData from '../fakeData'
-
 // import queryType
 import messageType from './queries/messageType'
 import userType from './queries/userType'
@@ -74,21 +72,6 @@ const queryType = new GraphQLObjectType({
             resolve: async (_, {id}) => {
                 const _user = await userInfo({id})
                 return _user
-            }
-        },
-        // field that returns { messageType }
-        message: {
-            type: messageType,
-            args: {
-                id: {
-                    type: new GraphQLNonNull(GraphQLID)
-                }
-            },
-            resolve: (_, {id}) => {
-                if (!fakeData[id]) {
-                    throw new Error(`no message exists with id ${id}`)
-                }
-                return fakeData[id]
             }
         }
     }
