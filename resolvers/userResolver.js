@@ -13,11 +13,9 @@ const userInfo = ({id}) => {
         SELECT *
         FROM users
     `
-    
+
     if (id) {
-        sql += `
-            WHERE id = ${id};
-        `
+        sql += `WHERE id = ${id};`
     }
 
     return sequelize.query(sql, {
