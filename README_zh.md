@@ -1,20 +1,20 @@
 # GraphQL-Server-Demo
 
-[中文文档](https://github.com/LanceGin/GraphQL-Server-Demo/blob/master/README_zh.md)
+[readme](https://github.com/LanceGin/GraphQL-Server-Demo/blob/master/README.md)
 
-> `GraphQL-Server-Demo` is a typical example of starting a GraphQL Server with node.js. It is an easy and readable project to learn and understand [GraphQL](https://graphql.org/).
+> `GraphQL-Server-Demo`是一个帮助大家更好的学习和理解GraphQL的简单且易读的示例项目，通过nodejs创建服务
 
-## Screenshots
+## 截屏
 
-### Query
+### 查询(Query)
 
 ![](http://orhcxc3kd.bkt.clouddn.com/query.png)
 
-### Mutation
+### 变更(Mutation)
 
 ![](http://orhcxc3kd.bkt.clouddn.com/mutation.png)
 
-## Structure
+## 项目结构
 
 ```
 GraphQL-Server-Demo
@@ -45,15 +45,15 @@ GraphQL-Server-Demo
          └── ... 
 ```
 
-* `app.js` -- server engine of this project
-* `dev.sqlite` -- test database
-* `schemas` -- basic schema to create the `GraphQLSchema`, contanins the basic `queryType` and `mutationType`
-* `types` -- all the `GraphQLObjectType` that user defined
-* `resolvers` -- all the resolvers to resolve the Type data
+* `app.js` -- 项目服务引擎
+* `dev.sqlite` -- 测试数据库
+* `schemas` -- 用来创建`GraphQLSchema`的基本schema文件, 包含最基本的`queryType` 和 `mutationType`
+* `types` -- 所有用户自定义的`GraphQLObjectType`
+* `resolvers` -- 所有类型字段的解析器
 
-## Quick Start
+## 快速启动
 
-Excute the commands below: 
+输入以下命令: 
 
 ```shell
 git clone git@github.com:LanceGin/GraphQL-Server-Demo.git
@@ -61,11 +61,11 @@ cd GraphQL-Server-Demo
 yarn && yarn start
 ```
 
-Open the url `http://localhost:4000/graphql`, you will see the `GraphiQL` GUI in the window, and you can excute the example query and mution operations.
+打开url `http://localhost:4000/graphql`，窗口中会显示 `GraphiQL` GUI ，可以用来执行查询或者变更操作
 
-## Query Operation
+## 查询操作
 
-### Request
+### 请求语句
 
 ```graphql
 query {
@@ -80,7 +80,7 @@ query {
 }
 ```
 
-### Response
+### 请求结果
 
 ```json
 {
@@ -109,9 +109,9 @@ query {
 }
 ```
 
-## Mutation Operation
+## 变更操作
 
-### Request
+### 请求语句
 
 ```graphql
 mutation {
@@ -122,7 +122,7 @@ mutation {
 }
 ```
 
-### Response
+### 请求结果
 
 ```json
 {
